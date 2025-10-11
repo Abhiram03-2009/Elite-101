@@ -35,7 +35,6 @@ def chatbot():
             age = int(age)
             break
         print("Please enter a valid age.")
-
     print(f"\nAwesome, {name}! Let's browse some products together.\n")
 
     # Store inventory

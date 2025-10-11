@@ -1,0 +1,98 @@
+# Retail Chatbot Project
+
+def show_receipt(cart, products, name):
+    if not cart:
+        print("\n🛒 Your cart is empty. Add products before checkout!\n")
+        return
+    
+    print("\n" + "-"*35)
+    print(f"🧾 RECEIPT - {name}'s Purchase")
+    print("-"*35)
+    total = 0
+    for item, qty in cart.items():
+        price = products[item] * qty
+        # Apply offers
+        if item in ["coffee maker", "blender"]:
+            price *= 0.8  # 20% off
+        if item in ["t-shirt", "jacket"] and qty >= 2:
+            price -= (qty // 2) * products[item]  # BOGO
+        total += price
+        print(f"{item.title():<15} x{qty:<3} ${price:.2f}")
+    print("-"*35)
+    print(f"TOTAL: {'':<13} ${total:.2f}")
+    print("-"*35)
+    print(f"Thank you for shopping with us, {name}! 🛒\n")
+    cart.clear()
+
+def chatbot():
+    print("🤖 Hello! Welcome to ShopSmart, your friendly virtual retail assistant!")
+
+    # Collect user info
+    name = input("What's your name? ").strip()
+    while True:
+        age = input(f"Nice to meet you, {name}! How old are you? ")
+        if age.isdigit() and int(age) > 0:
+            age = int(age)
+            break
+        print("Please enter a valid age.")
+
+    print(f"\nAwesome, {name}! Let's browse some products together.\n")
+
+    # Store inventory
+    products = {
+        "smartphone": 499, "laptop": 899, "headphones": 149,
+        "jacket": 59, "t-shirt": 25, "coffee maker": 79, "blender": 59
+    }
+    cart = {}
+
+    # Conversation loop
+    while True:
+        print("\nWhat would you like to do?")
+        print("1. Store hours  2. Location  3. Products  4. Offers  5. Checkout  6. Exit")
+        choice = input("Choose 1-6: ").strip()
+
+        if choice == "1":
+            print("🕒 Our store hours are Mon-Sat 9AM-9PM, Sun 10AM-6PM. Convenient for you!")
+        elif choice == "2":
+            print("📍 We are located at 123 Main Street, Downtown City. Easy to find!")
+        elif choice == "3":
+            print("\n🛍️ Here are our products:")
+            for item, price in products.items():
+                print(f"- {item.title()}: ${price}")
+            print("\nFeel free to add anything to your cart!")
+            
+            # Product adding
+            while True:
+                item = input("Enter a product to add ('done' when finished): ").strip().lower()
+                if item == "done":
+                    print("Okay, let's continue browsing or checkout when ready!")
+                    break
+                elif item in products:
+                    qty = input(f"How many {item}s would you like? ")
+                    if qty.isdigit() and int(qty) > 0:
+                        qty = int(qty)
+                        cart[item] = cart.get(item, 0) + qty
+                        print(f"Added {qty} {item}(s) to your cart! 🛒")
+                    else:
+                        print("Please enter a valid number for quantity.")
+                else:
+                    print("Sorry, we don’t carry that item. Try another one.")
+        elif choice == "4":
+            print("\n🎉 Current Offers:")
+            print("- 20% off coffee makers & blenders")
+            print("- Buy-One-Get-One-Free on t-shirts & jackets")
+        elif choice == "5":
+            # Simulate checkout conversation
+            if not cart:
+                print("\nYour cart is empty. Add some items before checking out!\n")
+            else:
+                print("\nPerfect! Let’s finalize your purchase.")
+                show_receipt(cart, products, name)
+        elif choice == "6":
+            print(f"\nGoodbye, {name}! Thanks for visiting ShopSmart. Come back soon! 👋")
+            break
+        else:
+            print("Hmm, I didn’t catch that. Please enter a number between 1 and 6.")
+
+# Run the chatbot
+chatbot()

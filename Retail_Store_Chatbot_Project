@@ -2,11 +2,11 @@
 
 def show_receipt(cart, products, name):
     if not cart:
-        print("\n🛒 Your cart is empty. Add products before checkout!\n")
+        print("\nYour cart is empty. Add products before checkout!\n")
         return
     
     print("\n" + "-"*35)
-    print(f"🧾 RECEIPT - {name}'s Purchase")
+    print(f"RECEIPT - {name}'s Purchase")
     print("-"*35)
     total = 0
     for item, qty in cart.items():
@@ -25,7 +25,7 @@ def show_receipt(cart, products, name):
     cart.clear()
 
 def chatbot():
-    print("🤖 Hello! Welcome to ShopSmart, your friendly virtual retail assistant!")
+    print("Hello! Welcome to ShopSmart, your friendly virtual retail assistant!")
 
     # Collect user info
     name = input("What's your name? ").strip()
@@ -51,11 +51,11 @@ def chatbot():
         choice = input("Choose 1-6: ").strip()
 
         if choice == "1":
-            print("🕒 Our store hours are Mon-Sat 9AM-9PM, Sun 10AM-6PM. Convenient for you!")
+            print("Our store hours are Mon-Sat 9AM-9PM, Sun 10AM-6PM. Convenient for you!")
         elif choice == "2":
-            print("📍 We are located at 123 Main Street, Downtown City. Easy to find!")
+            print("We are located at 123 Main Street, Downtown City. Easy to find!")
         elif choice == "3":
-            print("\n🛍️ Here are our products:")
+            print("\nHere are our products:")
             for item, price in products.items():
                 print(f"- {item.title()}: ${price}")
             print("\nFeel free to add anything to your cart!")
@@ -77,7 +77,7 @@ def chatbot():
                 else:
                     print("Sorry, we don’t carry that item. Try another one.")
         elif choice == "4":
-            print("\n🎉 Current Offers:")
+            print("\nCurrent Offers:")
             print("- 20% off coffee makers & blenders")
             print("- Buy-One-Get-One-Free on t-shirts & jackets")
         elif choice == "5":
@@ -88,7 +88,7 @@ def chatbot():
                 print("\nPerfect! Let’s finalize your purchase.")
                 show_receipt(cart, products, name)
         elif choice == "6":
-            print(f"\nGoodbye, {name}! Thanks for visiting ShopSmart. Come back soon! 👋")
+            print(f"\nGoodbye, {name}! Thanks for visiting ShopSmart. Come back soon!")
             break
         else:
             print("Hmm, I didn’t catch that. Please enter a number between 1 and 6.")
